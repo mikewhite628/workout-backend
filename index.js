@@ -9,7 +9,7 @@ app.use(require("body-parser").json()); // When someone sends something to the s
 
 require("dotenv").config();
 
-const MongoDB = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ahhxn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const MongoDB = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB}`;
 async function main() {
   await mongoose.connect(MongoDB);
   console.log("connected");
