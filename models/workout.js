@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 
 const WorkoutSchema = new mongoose.Schema({
   name: "string",
-  date: Number,
+  date: "string",
   sets: [
     {
-      reps: Number,
-      weight: Number,
+      repNumber: Number,
+      repWeight: Number,
     },
   ],
   notes: "string",
