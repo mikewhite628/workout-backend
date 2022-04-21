@@ -7,6 +7,7 @@ exports.workout_list = async (req, res, next) => {
 
   try {
     res.send(workouts);
+    console.log(req.body);
   } catch (error) {
     response.status(500).send(error);
   }
@@ -43,29 +44,51 @@ exports.workout_delete = (req, res, next) => {
   );
 };
 
-exports.workout_update = (req, res, next) => {
+exports.workout_exercise = (req, res, next) => {
   console.log(req.body.id);
-  //   async.parallel(
-  //     {
-  //       workout: function (callback) {
-  //         Workout.findById(req.body.id).exec(callback);
-  //       },
+  res.send(`${req.body.id} this is the id`);
+};
+
+exports.workout_update = (req, res, next) => {
+  console.log(req.body);
+  Workout.findByIdAndUpdate(
+    req.body._id,
+    {
+      name: req.body.lift,
+      date: req.body.dates,
+      sets: req.body.sets,
+      notes: req.body.notes,
+    },
+    function (err, exercise) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Updated User : ", exercise);
+        res.redirect("/");
+      }
+    }
+  );
+  // async.parallel(
+  //   {
+  //     workout: function (callback) {
+  //       Workout.findById(req.body.id).exec(callback);
   //     },
-  //     function (err, results) {
-  //       Workout.findByIdAndUpdate(
-  //         req.body.id,
-  //         {
-  //           lift: req.body.lift,
-  //           date: req.body.date,
-  //           notes: req.body.notes,
-  //           sets: req.body.sets,
-  //         },
-  //         function updateItem(err) {
-  //           if (err) {
-  //             return next(err);
-  //           }
+  //   },
+  //   function (err, results) {
+  //     Workout.findByIdAndUpdate(
+  //       req.body.id,
+  //       {
+  //         lift: req.body.lift,
+  //         date: req.body.date,
+  //         notes: req.body.notes,
+  //         sets: req.body.sets,
+  //       },
+  //       function updateItem(err) {
+  //         if (err) {
+  //           return next(err);
   //         }
-  //       );
-  //     }
-  //   );
+  //       }
+  //     );
+  //   }
+  // );
 };

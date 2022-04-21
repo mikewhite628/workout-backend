@@ -30,6 +30,7 @@ main().catch((err) => console.log(err));
 
 app.use("/api", indexRouter);
 app.use("/api", workoutRouter);
+app.use("/api/:id", workoutRouter);
 
 // // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
